@@ -37,7 +37,7 @@ func TestBuilder(t *testing.T) {
 	fc := &fakeConn{
 		cmp: make(chan struct{}),
 	}
-	rs, err := bl.Build(resolver.Target{Endpoint: "kube-dns.kube-system:53", Scheme: "kubernetes", Authority: ""}, fc, resolver.BuildOption{})
+	rs, err := bl.Build(resolver.Target{Endpoint: "kube-dns.kube-system:53", Scheme: "kubernetes", Authority: ""}, fc, resolver.BuildOptions{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -46,7 +46,7 @@ func TestBuilder(t *testing.T) {
 		t.Fatal("could not found endpoints")
 	}
 	fmt.Printf("ResolveNow \n")
-	rs.ResolveNow(resolver.ResolveNowOption{})
+	rs.ResolveNow(resolver.ResolveNowOptions{})
 	<-fc.cmp
 
 }
